@@ -2,42 +2,32 @@
 
 require_once 'Pessoa.php';
 
-class Professor extends Pessoa {
-    private string $especialidade;
-    private string $cref;
+class Aluno extends Pessoa {
+    private string $matricula;
+    private bool $ativo;
 
-    public function __construct(string $nome, string $cpf, string $email, string $especialidade, string $cref) {
+    public function __construct(string $nome, string $cpf, string $email, string $matricula) {
         parent::__construct($nome, $cpf, $email);
-
-        $this->especialidade = $especialidade;
-        $this->cref = $cref;
+        $this->matricula = $matricula;
+        $this->ativo = true;
     }
 
-    public function getEspecialidade(): string {
-        return $this->especialidade;
+    public function getMatricula(): string {
+        return $this->matricula;
     }
 
-    public function getCref(): string {
-        return $this->cref;
+    public function isAtivo(): bool {
+        return $this->ativo;
+    }
+
+    public function desativar(): void {
+        $this->ativo = false;
     }
 
     public function exibirDados(): void {
-        echo "=== PROFESSOR ===<br>";
-
-        echo "Nome: " . $this->nome . "<br>";
-
-        echo "CPF: " . $this->cpf . "<br>";
-
-        echo "E-mail: " . $this->email . "<br>";
-
-        echo "Especialidade: " . $this->especialidade . "<br>";
-
-        echo "CREF: " . $this->cref . "<br>";
-    }
-
-    // COMPORTAMENTO ESPECIALIZADO
-    public function apresentar(): void
-    {
-        echo "Olá! Sou o professor " . $this->nome . ", especialista em " . $this->especialidade . ".<br>";
+        echo "=== ALUNO ===<br>";
+        parent::exibirDados();
+        echo "Matrícula: " . $this->matricula . "<br>";
+        echo "Situação: " . ($this->ativo ? "Ativo" : "Inativo") . "<br>";
     }
 }
